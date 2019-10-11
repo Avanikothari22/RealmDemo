@@ -14,7 +14,7 @@ export class App extends React.Component {
 
   componentWillMount() {
     const b64encoded = Base64.btoa(
-      '123456',
+      '123456', // 4*ceil(n/3) so n = 6  i.e. 8 bytes = 64 bits
     );
     const binaryArr = hexStringToByte(b64encoded);
     let str = '123456';
@@ -77,7 +77,7 @@ function hexStringToByte(str) {
   for (let i = 0, len = str.length; i < len; i += 2) {
     byteArray.push(parseInt(str.substr(i, 2), 16));
   }
-  return new Int8Array(byteArray);
+  return new Int8Array(byteArray); // requires 64 bits in param: 8*64 = 512 bits = 64 bytes
 }
 
 // function convertUint8ArrayToBinaryString(u8Array) {
